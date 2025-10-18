@@ -7,8 +7,9 @@ const repl = require('repl');
 const program = require('commander');
 const esper = require('..');
 const Engine = esper.Engine;
+const closerCore = require('closer');
 
-function enterRepl() {
+function enterRepl(language) {
 	function replEval(cmd, context, fn, cb) {
 		engine.evalDetatched(cmd).then(function(result) {
 			cb(null, result);
@@ -19,14 +20,11 @@ function enterRepl() {
 	}
 
 	return repl.start({
-		prompt: 'js> ',
+		prompt: `${language}> `,
 		eval: replEval
 
 	});
 }
-
-
-
 
 program
 	.version(esper.version)
@@ -60,6 +58,7 @@ let engine = new Engine({
 	esRealms: true,
 });
 
+engine.addGlobal("closerCore", closerCore.core);
 
 let toEval = program.args.slice(0).map((f) => ({type: 'file', value: f}));
 if ( program.eval ) toEval.push({type: 'str', value: program.eval + '\n'});
@@ -69,7 +68,9 @@ if ( toEval.length < 1 ) program.interactive = true;
 
 function next() {
 	if ( toEval.length === 0 ) {
-		if ( program.interactive ) return enterRepl();
+        let language = 'js';
+        if (program.language) language = program.language;
+		if ( program.interactive ) return enterRepl(language);
 		else return process.exit();
 	}
 	var fn = toEval.shift();

@@ -1,0 +1,12 @@
+{
+  "name": "esper-lang-clojure",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "closer": "^0.2.3"
+  }
+}

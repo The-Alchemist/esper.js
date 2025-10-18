@@ -8,6 +8,8 @@
     "lint": "jshint src --show-non-errors",
     "test": "mocha",
     "repl": "node contrib/cli.js -i",
+    "lua": "node contrib/cli.js -i -l lua",
+    "clojure": "node contrib/cli.js -i -l clojure",
     "webpack": "webpack",
     "demo": "esdoc -c esdoc.json && node contrib/examine-corpus.js && webpack && webpack --env.test && webpack --env.test --env.profile=modern && node contrib/ui.js",
     "cover": "./node_modules/istanbul/lib/cli.js cover node_modules/.bin/_mocha -- --reporter dot",
@@ -89,6 +91,7 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
+    "closer": "^0.2.3",
     "commander": "^2.9.0",
     "esprima": "^4.0.0"
   }
