@@ -9,7 +9,10 @@ function esper(opts) {
 module.exports = esper;
 
 Engine = require('./Engine');
-esper.plugins = {'lang-javascript': require('./lang-javascript.js')};
+esper.plugins = {
+	'lang-javascript': require('./lang-javascript.js'),
+	'lang-clojure': require('../plugins/lang-clojure/index.js'),
+};
 esper.Engine = Engine;
 esper.Evaluator = require('./Evaluator');
 esper.Value = require('./Value');
@@ -34,7 +37,8 @@ esper.eval = function(source) {
 esper.version = require('../package.json').version;
 
 esper.languages = {
-	javascript: esper.plugins['lang-javascript']
+	javascript: esper.plugins['lang-javascript'],
+	clojure: esper.plugins['lang-clojure'],
 };
 
 esper.hooks = {
@@ -42,7 +46,6 @@ esper.hooks = {
 }
 
 esper.plugin = function(name) {
-	let pl;
 	if ( !esper.plugins[name] ) {
 		//console.log("Loading ", name, '../plugins/' + name + '/index.js');
 		let pl = require('../plugins/' + name + '/index.js');

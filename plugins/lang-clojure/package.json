@@ -1,14 +1,12 @@
 {
-  "name": "esper-lang-python",
+  "name": "esper-lang-clojure",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "skulpty": "git://github.com/codecombat/skulpty"
+    "closer": "^0.2.3"
   }
 }
